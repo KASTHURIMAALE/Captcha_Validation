@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Captcha Validator</title>
+
+<style>
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #5f757d;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  .container {
+    text-align: center;
+    color: white;
+  }
+
+  .box {
+    background: #eee;
+    padding: 25px;
+    border-radius: 15px;
+    width: 340px;
+  }
+
+  /* CAPTCHA BOX WITH NOISE IMAGE */
+  #captcha {
+    background: url('https://tse4.mm.bing.net/th/id/OIP.FlamLmlpNSwnz2apdkU9BAHaEg?pid=Api&P=0&h=180');
+    border: 2px solid #999;
+    padding: 10px;
+    font-size: 22px;
+    font-weight: bold;
+    letter-spacing: 3px;
+    margin-bottom: 15px;
+    font-family: 'Courier New', monospace;
+    color: black;
+  }
+
+  input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    font-size: 18px;
+    text-align: center;
+  }
+
+  .buttons {
+    display: flex;
+  }
+
+  button {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    color: white;
+    font-weight: bold;
+  }
+
+  .refresh {
+    background: linear-gradient(to right, #4a6cf7, #6a8cff);
+  }
+
+  .check {
+    background: linear-gradient(to right, #2ecc71, #58d68d);
+  }
+</style>
+
+</head>
+<body>
+
+<div class="container">
+  <h2>CAPTCHA VALIDATION</h2>
+
+  <div class="box">
+    
+    <div id="captcha">ABC123</div>
+
+    <input type="text" id="inputBox" placeholder="Enter Captcha">
+
+    <div class="buttons">
+      <button class="refresh" onclick="generateCaptcha()">Refresh</button>
+      <button class="check" onclick="checkCaptcha()">Check</button>
+    </div>
+
+  </div>
+</div>
+
+<script>
+let captchaText = "";
+
+function generateCaptcha() {
+  let chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  captchaText = "";
+
+  for (let i = 0; i < 6; i++) {
+    captchaText += chars[Math.floor(Math.random() * chars.length)];
+  }
+
+  document.getElementById("captcha").innerText = captchaText;
+}
+
+function checkCaptcha() {
+  let userInput = document.getElementById("inputBox").value;
+
+  if (userInput === captchaText) {
+    alert("Valid Captcha!!! Success");
+  } else {
+    alert("Invalid Captcha!!! Try Again");
+  }
+}
+
+// Run on load
+generateCaptcha();
+</script>
+
+</body>
+</html>
